@@ -1,11 +1,6 @@
-import Link from "next/link";
-
-export default function Contact() {
-    return (
-        <div>
-            <h1>contact</h1>
-            <Link href="/">home</Link>
-        </div>
-        
-    )
+export default function getStaticParams() {
+    return [
+        {slug: 'learn-to-code'},
+        {slug: 'angular-vs-react'},
+    ]
 }
