@@ -1,13 +1,23 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
-
 const inter = Inter({ subsets: ['latin'] })
+import Header from '@/components/Header'
 
-export default function Home() {
+const getData = async () => {
+  const data = await fetch('https://www.reddit.com/.json')
+  return data.json()
+}
+
+export default async function Home() {
+  const data = await getData();
+  const post = data.data.children[0].data.title
+
   return (
     <main className={styles.main}>
+      <Header />
       <div className={styles.description}>
+        <h1>{post}</h1>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.tsx</code>
@@ -86,6 +96,21 @@ export default function Home() {
           </p>
         </a>
       </div>
+
+      <div className={styles.grid}>
+        <div
+          className={styles.card}
+        >
+          <h2 className={inter.className}>
+            Docs <span>-&gt;</span>
+          </h2>
+          <p className={inter.className}>
+            Find in-depth information about Next.js features and API.
+          </p>
+        </div>
+
+      </div>
+
     </main>
   )
 }
